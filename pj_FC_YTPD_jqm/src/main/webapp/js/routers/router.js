@@ -21,9 +21,12 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	toiletDB_detailInfo : function() {
-		this.pg2 = new toiletDB_detailInfo();
-		this.changePage(this.pg2);
-
+		$("#map").remove();
+		$(".title").remove();
+		$("#toiletArea").remove();
+		$("#openTime").remove();
+		this.changePage(new toiletDB_detailInfo());
+		
 	},
 	changePage : function(page) {
 		$(page.el).attr('data-role', 'page');
@@ -31,8 +34,9 @@ var AppRouter = Backbone.Router.extend({
 		$('body').append($(page.el));
 		$.mobile.defaultPageTransition = 'none';
 		$.mobile.changePage($(page.el), {
-			changeHash : false
+			changeHash : false,
 		});
-	}
+		
+	},
 
 });

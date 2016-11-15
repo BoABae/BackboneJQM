@@ -8,9 +8,13 @@ var home = Backbone.View.extend({
     },
     events: {
     	'click #toiletDB_selectCity': 'toiletDB_selectCity',
+    	'click .home': 'home'
     },
     toiletDB_selectCity : function(){
     	app.navigate('toiletDB_selectCity', true);
+    },
+    home: function(){
+    	app.navigate('home', true);
     }
     
 });
@@ -22,7 +26,5 @@ $(document).ready(function () {
     Backbone.history.start();
     pData = new toiletDBModel();
     toiletDB_selectRegion = new toiletDB_selectCity();
-    toiletDB_detailInfo = new toiletDB_detailInfo();
-    
-    
+    toiletDB_detailInformaion = new toiletDB_detailInfo();
 });

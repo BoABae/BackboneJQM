@@ -18,7 +18,7 @@ var toiletDB_selectCity = Backbone.View.extend({
 		var urlJeonjuToilet = 'http://openapi.jeonju.go.kr/rest/toilet/getToiletList';
 		var serviceKey = '?ServiceKey=HfwEAMtSxZUmV1Ss%2F1kub%2FJslKdS%2FvAHe7gJbhSm7aCBwdTjJI04gvHFqeH1DdojAaWWzyBXPCQOxXxTk2tK%2Fg%3D%3D';
 		var queryParams1 = '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /*검색건수*/
-		queryParams1 += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('3');
+		queryParams1 += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
 		queryParams1 += '&' + encodeURIComponent('startPage') + '=' + encodeURIComponent('1');/*페이지 번호*/
 		
 
@@ -31,15 +31,16 @@ var toiletDB_selectCity = Backbone.View.extend({
 				xmlDoc = $.parseXML(xml),
 				$xml = $(xmlDoc);
 				var xmlData = $xml.find("list");
-				var content = "";
+				//var content = "";
 				$(xmlData).each(function(){
 					dataSid = $(this).find("dataSid").text();
 					dataTitle = $(this).find("dataTitle").text();
 					toiletArea = $(this).find("toiletArea").text();
-					content +="<li><a>" +"화장실: " + dataTitle + "&nbsp;" + "주소 :" + toiletArea +"</a></li>";
-					
+					content ="<li><a>" +"화장실: " + dataTitle + "&nbsp;" + "주소 :" + toiletArea +"</a></li>";
+					$("#list").append(content).listview('refresh');
 				});
-				$("#list").append(content).listview("refresh");
+				//$("#list").append(content).listview("refresh");
+				
 				$("#list li").on("click", function(){
 					var index = $(this).index();
 					var title = xmlDoc.getElementsByTagName('dataTitle')[index].childNodes[0];
@@ -58,30 +59,46 @@ var toiletDB_selectCity = Backbone.View.extend({
     },
     home: function(){
     	app.navigate('home', true);
-    }
+    },
+ 
+    
 });
 
 
 var toiletDB_detailInfo = Backbone.View.extend({
-	el: $("#mapContent"),
+	//el: $("#mapContent"),
 
 	events:{
 		'click .back': 'back',
-		'click #toiletDB_selectCity': 'page1'
+		'click #toiletDB_selectCity back': 'page1',
+		'click .home': 'home',
 	},
 	back: function(){
 		app.navigate('toiletDB_selectCity', true);
+		
 	},
 	page1: function(){
 		app.navigate('toiletDB_selectCity', true);
 	},
+	home: function(){
+		app.navigate('home', true);
+	},
 	
-    render:function (eventName) {
-    	var template = _.template($("#toiletDB_detailInfo").html(), {});
-    	this.$el.html(template);
-    	setTimeout(this.mapRender, 180);
+
+    template:_.template($('#toiletDB_detailInfo').html()),
+
+    render:function () {
+        $(this.el).html(this.template());
+    	setTimeout(this.mapRender, 220);
+    	/*
+    	var publicData = pData.toJSON();
+    	
+    	console.log(publicData.openTime);
+    	*/
+    	
     },
     mapRender: function(){
+    	
     	var publicData = pData.toJSON();
     	var location = new daum.maps.LatLng(publicData.lat, publicData.lng);
     	var mapContainer = document.getElementById("map");
@@ -96,10 +113,12 @@ var toiletDB_detailInfo = Backbone.View.extend({
 			map: map,
 			position: location
 		});
-    	
-    	$(".title").append(publicData.dataTitle);
+		$(".title").append(publicData.dataTitle);
     	$("#toiletArea").append(publicData.toiletArea);
     	$("#openTime").append(publicData.openTime);
+		
+		console.log("map");
+    	
     	
     }
 });

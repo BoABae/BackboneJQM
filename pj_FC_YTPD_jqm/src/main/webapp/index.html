@@ -26,7 +26,6 @@
 	<div id="mapContent"></div>
 
 	<script type="text/template" id="home">
-
 <div data-role="header">
 
 <h1>공공데이터</h1>
@@ -36,19 +35,20 @@
 
 <div data-role="content">
 <div data-role="panel" id="popupPanel" data-position="right" data-display="overlay">
-<a href="#home" data-rel="close" class="ui-btn">close</a>
-<ul data-role="listview"  data-inset="true">
+	<a data-rel="close" class="ui-btn">close</a>
+			<ul data-role="listview"  data-inset="true" data-icon="false">
+				<li class="home"><a href="#home">공공데이터 선택</a></li>
                 <li id="toiletDB_selectCity"><a href="#toiletDB_selectCity">지역 화장실 정보</a></li>
             </ul>
 </div>
 
 
 <ul data-role="listview"  data-inset="true">
+
                 <li id="toiletDB_selectCity"><a href="#toiletDB_selectCity">지역 화장실 정보</a></li>
             </ul>
 
 </div>
-
     </script>
 
 
@@ -60,24 +60,27 @@
 <a href="#popupPanel" data-position-to="window" class="ui-btn-right">menu</a>
         </div>
 
-        <div data-role="content">
-<div data-role="panel" id="popupPanel" data-position="right" data-display="overlay">
-<a data-rel="close" class="ui-btn">close</a>
-<ul data-role="listview"  data-inset="true">
+      <div data-role="content">
+		<div data-role="panel" id="popupPanel" data-position="right" data-display="overlay">
+			<a data-rel="close" class="ui-btn">close</a>
+			<ul data-role="listview"  data-inset="true" data-icon="false">
+				<li class="home"><a href="#home">공공데이터 선택</a></li>
                 <li id="toiletDB_selectCity"><a href="#toiletDB_selectCity">지역 화장실 정보</a></li>
             </ul>
-</div>
+		 </div>
+
+
             <div class="ui-field-contain">
-	<select id="cityToilet">
-	<option>전주</option>
-	</select>
-	</div>
-		<button id="search">search</button>
+				<select id="cityToilet">
+				<option>전주</option>
+				</select>
+			</div>
+			<button id="search">search</button>
 
-		<ul data-role="listview" id="list" data-inset="true">
+			<ul data-role="listview" id="list" data-inset="true">
 
 
-		</ul>
+			</ul>
         </div>
 
     </script>
@@ -94,8 +97,6 @@
        	<div id="map"></div>
 
 
-
-
 		<div data-role="listview" data-inset="true">
 		주소 : <li id="toiletArea"></li>
 		운영시간 : <li id="openTime"></li>
@@ -105,8 +106,9 @@
 	</div>
 
 <div data-role="panel" id="popupPanel" data-position="right" data-display="overlay">
-<a href="#home" data-rel="close" class="ui-btn">close</a>
-<ul data-role="list view"  data-inset="true">
+		<a data-rel="close" class="ui-btn">close</a>
+		<ul data-role="listview"  data-inset="true" data-icon="false">
+				<li class="home"><a href="#home">공공데이터 선택</a></li>
                 <li id="toiletDB_selectCity"><a href="#toiletDB_selectCity">지역 화장실 정보</a></li>
             </ul>
     </script>
@@ -114,8 +116,8 @@
 	<script>
 		
 	</script>
-	<script src="js/routers/router.js"></script>
 	<script src="js/views/mainView.js"></script>
+	<script src="js/routers/router.js"></script>
 	<script src="js/views/toiletDBView.js"></script>
 	<script src="js/models/toiletDBModel.js"></script>
 
